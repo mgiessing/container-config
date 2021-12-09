@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     rm -rf /var/lib/apt/lists/*
 
 ARG GOLANG_VERSION=x.x.x
-RUN wget -nv -O - https://storage.googleapis.com/golang/go${GOLANG_VERSION}.linux-amd64.tar.gz \
+RUN wget -nv -O - https://storage.googleapis.com/golang/go${GOLANG_VERSION}.linux-ppc64le.tar.gz \
     | tar -C /usr/local -xz
 ENV PATH /usr/local/go/bin:$PATH
 
@@ -46,11 +46,9 @@ ENV NVIDIA_DISABLE_REQUIRE="true"
 ENV NVIDIA_VISIBLE_DEVICES=all
 ENV NVIDIA_DRIVER_CAPABILITIES=utility
 
-RUN dnf install -y curl wget yum-utils
+RUN dnf install -y curl wget yum-utils jq
 
-RUN wget -O /usr/local/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 \
-	   && chmod +x /usr/local/bin/jq
-RUN curl -s -L https://nvidia.github.io/nvidia-docker/centos7/nvidia-docker.repo |\
+RUN curl -s -L https://nvidia.github.io/nvidia-docker/centos8/nvidia-docker.repo |\
     tee /etc/yum.repos.d/nvidia-docker.repo
 
 ARG LIBNVIDIA_CONTAINER_VERSION
