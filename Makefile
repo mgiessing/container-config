@@ -22,7 +22,7 @@ CUDA_VERSION ?= 11.4.2
 GOLANG_VERSION ?= 1.16.4
 DOCKER   ?= docker
 ifeq ($(IMAGE),)
-REGISTRY ?= nvidia
+REGISTRY ?= quay.io/mgiessing
 IMAGE := $(REGISTRY)/container-toolkit
 endif
 
